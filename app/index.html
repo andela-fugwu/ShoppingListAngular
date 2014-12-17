@@ -1,43 +1,63 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
-</head>
-<body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
+<html ng-app="shoppingListApp">
+  <head>
+    <title>Shopping List App</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="../node_modules/angular-mocks/angular-mocks.js"></script>
+    <script src="js/controllers.js"></script>
+  </head>
+  <body ng-controller="shoppingListCtrl">
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+    <div id="wrapper">
 
-  <div ng-view></div>
+      <nav>
+        <img src='img/logo.jpg' alt="logo.png">
+        <h3>Never Forget Anything Again</h3>
+      </nav>
 
-  <div>Angular seed app: v<span app-version></span></div>
+      <section>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
-</body>
+        <p>Add Item to Shopping List</p>
+
+        <div id="add_item" class="section_div">
+          <form>
+            <label for="add_field">Whats is the Item?</label>
+            <input type="text" id="add_field" ng-model="itemIn">
+            <button ng-click="add(itemIn)">Add</button>
+          </form>
+        </div>
+
+        <p>Items You Have Not Bought</p>
+        <div id="to_buy" class="section_div">
+
+          <ul id="items_to_buy">
+          <label>Items you added to the list will appear here</label>
+
+            <li ng-repeat="item in tobuy" >
+              <input type="checkbox" ng-click="moveDown(item)">
+              <label>{{item.name}}</label>
+              <button class="delete" ng-click="remove(item)">Delete</button>
+            </li>
+
+          </ul>
+        </div>
+
+        <p>Items You Have Bought</p>
+        <div id="bought_items" class="section_div">
+          <label>Items you have bought will appear here</label>
+
+          <ul id="bought_item">
+            <li ng-repeat="item in bought" >
+              <input type="checkbox" ng-click="moveUp(item)">
+              <label>{{item.name}}</label>
+              <button class="delete">Delete</button>
+            </li>
+          </ul>
+
+        </div>
+      </section>
+    </div>
+  </body>
 </html>
