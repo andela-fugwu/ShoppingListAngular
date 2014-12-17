@@ -24,18 +24,20 @@ shoppingListApp.controller('shoppingListCtrl', function($scope) {
   };
 
   $scope.remove = function (item) {
-    $scope.tobuy.splice(item, 1);
+    var index = $scope.tobuy.indexOf(item);
+    $scope.tobuy.splice(index , 1);
+    
   };
   
   $scope.moveDown = function (item) {
     $scope.bought.push(item);
-    $scope.tobuy.splice(item, 1);
-
+    var index = $scope.tobuy.indexOf(item);
+    $scope.tobuy.splice(index, 1);
   };
 
   $scope.moveUp = function (item) {
     $scope.tobuy.push(item);
-    $scope.bought.splice(item, 1);
-
+    var index = $scope.bought.indexOf(item);
+    $scope.bought.splice(index, 1);
   };
 });
